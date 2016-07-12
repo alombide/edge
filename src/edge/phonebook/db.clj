@@ -35,7 +35,7 @@
 (defn get-next-db-id []
   (.hashCode (ObjectId.)))
 
-(defn add-entry
+(defn add-entry!
   "Add a new entry to the database. Returns the id of the newly added
   entry."
   [db entry]
@@ -45,7 +45,7 @@
       record-id)))
 
 
-(defn update-entry
+(defn update-entry!
   "Update a new entry to the database. Returns the id of the newly added
   entry."
   [db id entry]
@@ -54,7 +54,7 @@
    id))
 
 
-(defn delete-entry
+(defn delete-entry!
   "Delete a entry from the database."
   [db id]
   (dosync

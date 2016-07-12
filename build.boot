@@ -88,6 +88,7 @@
   []
   (set-env! :dependencies #(vec (concat % '[[reloaded.repl "0.2.1"]])))
   (set-env! :source-paths #(conj % "dev"))
+  (set-env! :source-paths #(conj % "test"))
 
   ;; Needed by tools.namespace to know where the source files are
   (apply clojure.tools.namespace.repl/set-refresh-dirs (get-env :directories))
@@ -103,6 +104,7 @@
    (cljs :ids #{"edge"} :optimizations :none)
    (dev-system)
    (target)))
+
 
 (deftask build
   "This is used for creating optimized static resources under static"

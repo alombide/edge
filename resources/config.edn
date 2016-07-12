@@ -6,9 +6,10 @@
  #profile {:dev {:port 3000}}
 
 :mongodb
-#profile {:dev
-   {:host "localhost"
-    :dbname "edge-dev"}}
+{:host "localhost"
+ :dbname
+  #profile {:dev "edge-dev"
+            :test "edge-test"}}
 
  :selmer
  {:template-caching?

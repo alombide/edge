@@ -52,7 +52,7 @@
      :post {:parameters {:form {:surname String :firstname String :phone String}}
             :consumes #{"application/x-www-form-urlencoded"}
             :response (fn [ctx]
-                        (let [id (db/add-entry db (get-in ctx [:parameters :form]))]
+                        (let [id (db/add-entry! db (get-in ctx [:parameters :form]))]
                           (java.net.URI. (:uri (yada/uri-for ctx :edge.resources/phonebook-entry {:route-params {:id id}})))))}}}))
 
 (defn new-entry-resource [db]
@@ -98,7 +98,7 @@
       (fn [ctx]
         (let [entry (get-in ctx [:parameters :path :id])]
           (assert entry)
-          (db/update-entry db entry
+          (db/update-entry! db entry
                            (or (get-in ctx [:parameters :form])
                                (:body ctx)))))}
 
@@ -107,7 +107,7 @@
       :response
       (fn [ctx]
         (let [id (get-in ctx [:parameters :path :id])]
-          (db/delete-entry db id)
+          (db/delete-entry! db id)
           (let [msg (format "Entry %s has been removed" id)]
             (case (get-in ctx [:response :produces :media-type :name])
               "text/plain" (str msg "\n")
